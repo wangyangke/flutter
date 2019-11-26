@@ -7,12 +7,12 @@ void main() => runApp(new MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-        return new MaterialApp(
-        title: 'Startup Name Generator',
+    return new MaterialApp(
+      title: 'Startup Name Generator',
 
-        theme: new ThemeData(primaryColor: Colors.green),
+      theme: new ThemeData(primaryColor: Colors.green),
 //      home: new RandomWords(),//listView
-        home: new TutorialsPage(),
+      home: new TutorialsPage(),
 
 
     );
@@ -103,15 +103,15 @@ class RandomWordsState extends State<RandomWords> {
       new MaterialPageRoute(
         builder: (context) {
           final tiles = _saved.map(
-            (pair) {
+                (pair) {
               return new ListTile(
                 title: new Text(pair.asPascalCase, style: _biggerFont),
               );
             },
           );
           final divided = ListTile.divideTiles(context: context, tiles: tiles
-                  // ignore: missing_return
-                  )
+            // ignore: missing_return
+          )
               .toList();
           return new Scaffold(
             appBar: new AppBar(title: new Text('Saved Suggestions')),
@@ -143,7 +143,8 @@ class _TutorialsPageState extends State<TutorialsPage> {
             ),
             padding: const EdgeInsets.only(left: 30.0, right: 30.0),
           ),
-
+          new BoxDecorations(),
+          new FiexDemo(),
         ],
       ),
     );
@@ -180,7 +181,9 @@ class _TutorialsPageState extends State<TutorialsPage> {
           ),
           Text('99')
         ],
-      )
+
+      ),
+
     ]);
     row = SizedBox(
       height: 60.0,
@@ -190,25 +193,29 @@ class _TutorialsPageState extends State<TutorialsPage> {
   }
 
 }
-class TestWidget extends StatelessWidget{
+
+class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var floatButton=FlatButton(
-      onPressed: ()=>print("this is FlatButton"),
+    var floatButton = FlatButton(
+      onPressed: () => print("this is FlatButton"),
     );
     return null;
   }
 
 }
-Widget _buildButtonColumn(BuildContext  context,IconData icon,String label){
-  final color=Theme.of(context).primaryColor;
-  return  Column(
-    mainAxisSize:MainAxisSize.max,
+
+Widget _buildButtonColumn(BuildContext context, IconData icon, String label) {
+  final color = Theme
+      .of(context)
+      .primaryColor;
+  return Column(
+    mainAxisSize: MainAxisSize.max,
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
-      Icon(icon,color: color),
+      Icon(icon, color: color),
       Container(
-        margin: const EdgeInsets.only(top:8.0),
+        margin: const EdgeInsets.only(top: 8.0),
         child: (Text(
           label,
           style: TextStyle(
@@ -221,10 +228,12 @@ Widget _buildButtonColumn(BuildContext  context,IconData icon,String label){
     ],
   );
 }
+
 class _TitleSection extends StatelessWidget {
   final String title;
   final String subtitle;
   final int starCount;
+
   _TitleSection(this.title, this.subtitle, this.starCount);
 
   @override
@@ -232,7 +241,7 @@ class _TitleSection extends StatelessWidget {
     // 为了给 title section 加上 padding，这里我们给内容套一个 Container
     return Container(
       // 设置上下左右的 padding 都是 32。类似的还有 EdgeInsets.only/symmetric 等
-padding: EdgeInsets.all(32.0),
+      padding: EdgeInsets.all(32.0),
       child: Row(
         children: <Widget>[
           //这里为了让标题占满屏幕宽度的剩余空间，用 Expanded 把标题包了起来
@@ -245,4 +254,68 @@ padding: EdgeInsets.all(32.0),
     );
   }
 
+}
+// ignore: slash_for_doc_comments
+/**设置边框&padding&margin&圆角&背景图*/
+class BoxDecorations extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(55.0),
+      margin: const EdgeInsets.all(10.0),
+      decoration: new BoxDecoration(
+          border: new Border.all(
+            color: Colors.yellow,
+          ),
+          image: const DecorationImage(
+            image: const NetworkImage(
+              'https://gw.alicdn.com/tfs/TB1CgtkJeuSBuNjy1XcXXcYjFXa-906-520.png',
+            ),
+            fit: BoxFit.contain,
+          ),
+          borderRadius:const BorderRadius.only(
+            topLeft: const Radius.circular(3.0),
+            topRight: const Radius.circular(16.0),
+            bottomLeft: const Radius.circular(3.0),
+              bottomRight: const Radius.circular(16.0),
+          ),
+      ),
+      child: Text(''),
+    );
+  }
+
+}
+class FiexDemo extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Flex(direction: Axis.horizontal,
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: <Widget>[
+      new Container(
+        width: 40.0,
+          height: 60.0,
+        color: Colors.pink,
+      child: const Center(
+        child: const Text("left")
+      )
+      ),
+      new Container(
+        width: 80.0,
+        height: 60.0,
+        color: Colors.grey,
+        child: const Center( child: const Text("middle")),
+      ),
+      new Container(
+        width: 60.0,
+        height: 60.0,
+        color: Colors.yellow,
+        child: const Center(
+          child: const Text("right"),
+        ),
+      )
+    ],
+    );
+  }
 }
